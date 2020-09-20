@@ -6,7 +6,7 @@ const TOKEN = process.env.TOKEN;
 
 client.login(TOKEN);
 
-client.on("ready", async () => {
+client.on("ready", () => {
   console.info(`Logged in as ${client.user.tag}!`);
 });
 
