@@ -1,27 +1,27 @@
 require("dotenv").config();
 const Discord = require("discord.js");
-const bot = new Discord.Client();
-bot.commands = new Discord.Collection();
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
 const TOKEN = process.env.TOKEN;
 
-bot.login(TOKEN);
+client.login(TOKEN);
 
-bot.on("ready", () => {
-  console.info(`Logged in as ${bot.user.tag}!`);
+client.on("ready", async () => {
+  console.info(`Logged in as ${client.user.tag}!`);
 });
 
 // ======== LOGGED IN =========
 
 const prefix = "!";
 
-bot.on("message", (msg) => {
+client.on("message", async (msg) => {
   if (msg.channel.type === "dm" && !msg.content.startsWith(prefix)) {
-    if (!msg.author.bot) {
+    if (!msg.author.client) {
       msg.reply(
-        `Jestem botem, przestań do mnie pisać ${msg.author} =.=\n` +
+        `Jestem clientem, przestań do mnie pisać ${msg.author} =.=\n` +
           "Pisz do <@156086694611910656> ."
       );
-      bot.user.setUsername("qbek AI");
+      client.user.setUsername("qbek AI");
     } else return;
   }
 
@@ -33,7 +33,16 @@ bot.on("message", (msg) => {
       return msg.channel.send(`No arguments in your command, ${msg.author}!`);
     } else
       msg.channel.send(
-        `Command name: ${command}\nArguments: ${args}\nChannel: ${msg.channel.type}`
+        `Command name: ${command}\nArguments: ${args}\nChannel: ${msg.channel}`
       );
+  } else if (command === "channel" && msg.channel.id === "756705273921405009") {
+    return msg.channel.send(msg.channel.id);
   }
+});
+
+client.on("messageReactionAdd", async (react, user) => {
+  console.log("lol1");
+});
+client.on("messageReactionRemove", async (react, user) => {
+  console.log("lol2");
 });
