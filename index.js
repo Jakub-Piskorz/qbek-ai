@@ -17,7 +17,7 @@ const prefix = "!";
 client.on("message", (msg) => {
   // DM reaction
   if (msg.channel.type === "dm" && !msg.content.startsWith(prefix)) {
-    if (!msg.author.client) {
+    if (!msg.author.bot) {
       msg.reply(
         `Jestem botem, przestań do mnie pisać ${msg.author} =.=\n` +
           "Pisz do <@156086694611910656> ."
