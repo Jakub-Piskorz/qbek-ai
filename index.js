@@ -14,7 +14,8 @@ client.on("ready", async () => {
 
 const prefix = "!";
 
-client.on("message", async (msg) => {
+client.on("message", (msg) => {
+  // DM reaction
   if (msg.channel.type === "dm" && !msg.content.startsWith(prefix)) {
     if (!msg.author.client) {
       msg.reply(
@@ -25,24 +26,23 @@ client.on("message", async (msg) => {
     } else return;
   }
 
+  //Defining command structure
   const args = msg.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === "test") {
-    if (!args.length) {
-      return msg.channel.send(`No arguments in your command, ${msg.author}!`);
-    } else
-      msg.channel.send(
-        `Command name: ${command}\nArguments: ${args}\nChannel: ${msg.channel}`
-      );
-  } else if (command === "channel" && msg.channel.id === "756705273921405009") {
-    return msg.channel.send(msg.channel.id);
-  }
-});
+  //Commands
 
-client.on("messageReactionAdd", async (react, user) => {
-  console.log("lol1");
-});
-client.on("messageReactionRemove", async (react, user) => {
-  console.log("lol2");
+  if (command === "roles" && msg.channel.id === "756705273921405009") {
+    const embed = new Discord.RichEmbed();
+    embed.setTitle("Server roles");
+    embed.setColor("BLUE");
+    embed.setDescription(
+      `React to this message with emoji to receive role:
+
+      :computer: - Web dev speedrun
+      :flag_gb: - English speedrun
+      :flag_jp: - 日本語 speedrun`
+    );
+    msg.channel.send(embed);
+  }
 });
