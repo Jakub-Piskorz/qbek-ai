@@ -19,7 +19,7 @@ client.on("message", (msg) => {
   if (msg.channel.type === "dm" && !msg.content.startsWith(prefix)) {
     if (!msg.author.client) {
       msg.reply(
-        `Jestem clientem, przestań do mnie pisać ${msg.author} =.=\n` +
+        `Jestem botem, przestań do mnie pisać ${msg.author} =.=\n` +
           "Pisz do <@156086694611910656> ."
       );
       client.user.setUsername("qbek AI");
